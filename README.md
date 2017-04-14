@@ -1,4 +1,3 @@
-# instagram
 Instagram clone for nycda class
 
 ##Contributors
@@ -8,3 +7,5 @@ Instagram clone for nycda class
 ##API Documentation
 
 ##DB Schemas
+
+test pull request
