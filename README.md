@@ -2,9 +2,9 @@ Instagram clone for nycda class
 
 ##Contributors
 
-Ling 
-
-Andrew
+Ling- frontend
+Both- Server/API
+Andrew- database
 
 ##Installation Instructions
 
