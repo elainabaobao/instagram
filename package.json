@@ -1,0 +1,25 @@
+{
+  "name": "instagram",
+  "version": "1.0.0",
+  "description": "ling and andrew",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elainabaobao/instagram.git"
+  },
+  "author": "ling and andrew",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elainabaobao/instagram/issues"
+  },
+  "homepage": "https://github.com/elainabaobao/instagram#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "serve-static": "^1.12.1",
+    "supervisor": "^0.12.0"
+  }
+}
