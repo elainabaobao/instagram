@@ -4,9 +4,6 @@ var express = require('express');
 // static file server
 var serveStatic = require('serve-static');
 
-// api routes
-// var routes = require('./app/routes/web');
-
 //create an express application
 var app = express();
 
@@ -14,6 +11,8 @@ var app = express();
 app.use('/', serveStatic( 'public', {
 	'index': [ 'index.html' ]
 }));
+
+// app.get('/', )
 
 // app.use('/postDetails/:id', serveStatic( 'public', {
 // 	'index': [ 'details.html' ]
