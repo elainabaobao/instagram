@@ -1,12 +1,15 @@
 //include express
-var express = require('express');
+const express = require('express');
+// const db = require('sqlite');
+
+const parser = require('body-parser');
+app.use(parser.json());
 
 // static file server
-var serveStatic = require('serve-static');
+const serveStatic = require('serve-static');
 
 //create an express application
-var app = express();
-
+const app = express();
 
 app.use('/', serveStatic( 'public', {
 	'index': [ 'index.html' ]
@@ -23,6 +26,8 @@ app.use('/', serveStatic( 'public', {
 // }));
 
 // app.use('/api',  routes);
+
+
 
 //have the application listen on a specific port
 app.listen(3000, function() {
