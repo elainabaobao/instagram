@@ -110,9 +110,82 @@ module.exports = function (app, passport) {
         }
     });
     
-    
-    
-}    
+ //APIs
+    var webUrl = app.get('webUrl');
+
+    app.post('/uploadPhoto', function (req, res) {
+//        console.log(req.files);
+        if (!req.files) {
+            res.json({status: 500, 'message': 'Please upload an image file.'});
+        } else {
+            var imageFile = req.files.userPhoto;
+            var filename = req.files.userPhoto.name;
+            var file_split = filename.split('.');
+            var filename_original = file_split[0];
+            var filename_extension = file_split[1];
+            var new_file_name = filename_original + "_" + Date.now() + '.' + filename_extension;
+            var caption = req.body.caption;
+            if (req.files.userPhoto.mimetype == 'image/jpeg' || req.files.userPhoto.mimetype == 'image/gif' || req.files.userPhoto.mimetype == 'image/png') {
+                imageFile.mv(__dirname + '/../../uploads/' + new_file_name, function (err) {
+                    if (err) {
+                        res.json({status: 500, 'message': 'Error while uploading file.'});
+                    }
+                    //saving entry in db
+                    db.run("INSERT into users_images (user_id,image,caption) VALUES ('" + req.session.user.id + "','" + new_file_name + "','" + caption + "')");
+                    res.json({status: 200, 'message': 'Image uploaded successfully'});
+                });
+            } else {
+                res.json({status: 500, 'message': 'Error: Allowed file types are jpg/jpeg/png/gif'});
+            }
+        }
+    });
+
+    app.post(webUrl + 'login', function (req, res, next) {
+
+        passport.authenticate('local-login', {successRedirect: '/dashboard', failureRedirect: '/'}, function (err, user, info) {
+            //console.log(err, user, info);
+            if (err || !user) {
+                res.json({status: 500, 'message': 'Invalid email or password.'});
+                return false;
+            }
+            return req.logIn(user, function (err) {
+                if (err) {
+                    res.json({status: 500, 'message': 'Error in logging in.'});
+                } else {
+                    req.session.user = req.user;
+                    console.log('session id ', req.sessionID);
+                    res.json({status: 200, 'message': 'Login Successfully', 'user': req.session.user});
+                }
+            });
+        }
+        )(req, res, next);
+    });
+
+    app.post(webUrl + 'signup', function (req, res, next) {
+        passport.authenticate('local-signup', {successRedirect: '/dashboard', failureRedirect: '/'}, function (err, user, info) {
+//            console.log(err, user, info);
+            if (err || !user) {
+                res.json({status: 500, 'message': 'Email id already registered.'});
+                return false;
+            }
+            return req.logIn(user, function (err) {
+                if (err) {
+                    res.json({status: 500, 'message': 'Error in logging in.'});
+                } else {
+                    req.session.user = req.user;
+                    console.log('session id ', req.sessionID);
+                    res.json({status: 200, 'message': 'Login Successfully', 'user': req.session.user});
+                }
+            });
+        }
+        )(req, res, next);
+    });
+
+    app.get(webUrl + 'logout', function (req, res) {
+        req.session.destroy();
+        res.redirect('/');
+    });
+}  
 
 
 function checkAuth(req, res, next) {
