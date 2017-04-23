@@ -1,45 +1,61 @@
-//include express
-const express = require('express');
-// const db = require('sqlite');
+/**
+ Loading Dependencies.
+ **/
+var express = require('express');
+var app = express();
+var passport = require('passport');
+var session = require('express-session');
+var http = require('http');
+var fileUpload = require('express-fileupload');
+var fs = require('fs');
 
-const parser = require('body-parser');
-app.use(parser.json());
+require('./app/config/config')(app);
 
-// static file server
-const serveStatic = require('serve-static');
+http = http.createServer(app);
 
-//create an express application
-const app = express();
+require('./app/config/connection')(app);
+/**
+ Global Variables and Object
+ **/
+global.upload_path = __dirname + '/public/uploads/';
+global.image_path = __dirname + '/public/images/';
 
-app.use('/', serveStatic( 'public', {
-	'index': [ 'index.html' ]
-}));
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
-// app.get('/', )
+//app.set('view engine', 'ejs');
+    
+/**
+ Setting static paths
+ **/
+app.use(express.static(__dirname + '/views'));
+app.use('/styles', express.static(__dirname + '/views/styles'));
+app.use('/javascript', express.static(__dirname + '/views/javascript'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
+app.use(session({ 
+    secret: app.get('sessionSecretKey'),
+    resave: true,
+    saveUninitialized: true 
+})); // session secret
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(fileUpload());
 
-// app.use('/postDetails/:id', serveStatic( 'public', {
-// 	'index': [ 'details.html' ]
-// }));
+module.exports = function (req, res) {
 
-// app.use('/updatePost/:id', serveStatic( 'public', {
-// 	'index': [ 'update.html' ]
-// }));
+}
 
-// app.use('/api',  routes);
+/**
+ Loading Routes
+ **/
+
+require('./app/routes/web')(app, passport, express);
+require('./app/config/passport')(passport);
 
 
-
-//have the application listen on a specific port
-app.listen(3000, function() {
-    console.log("Listening on 3000");
+var server = http.listen(app.get('port'), function () {
+    console.log("Listening on " + app.get('port'));
 });
-
-
-
-
-
-
-
 
 
 
