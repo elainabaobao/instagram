@@ -1,7 +1,7 @@
 
 <!doctype html>
 <html>
-    <head>
+   <head>
         <meta charset='utf-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <title>Project</title>
@@ -32,25 +32,12 @@
 
         <main>
             <div class="jumbotron">
-                <h3>Hi <%= user_name %></h3>
-                <p>Upload picture</p>
-                <form id = "uploadForm" enctype = "multipart/form-data" action = "uploadPhoto" method = "post">
-                    
-                    <input type="file" name="userPhoto" />
-Caption : <textarea name= "caption" rows="5" cols="100" class="form-control"></textarea>
-                    <input type="submit" value="Upload Image" name="submit" class="btn btn-success">
-                    <div style="display: none" id = "status"></div>
-                    <div class="error_form" style="display: none"></div>
-                </form>
-                <br><br>
+                <h3>Active Users</h3>
                 <div class="clearfix"></div>
-                <h4><%= tot_photos %> Images uploaded by you.</h4><br>
                 <div class="row">
-                    <% photos_uploaded.forEach(function(photo) { %>
-                        <div class="col-sm-4 tab" >
-                            <img src="uploads/<%= photo.image %>" alt="<%= photo.image %>">
-                            <p class="caption"><%= photo.caption %></p>
-                            <p class="uploaded_on">Uploaded on: <%= photo.uploaded %></p>
+                    <% arr_users.forEach(function(user) { %>
+                        <div class="col-sm-2 tab" >
+                        <a href="/user/<%= user.id%>" id="user_link"><%= user.name%></a>
                         </div>
                     <% }); %>
                 </div>

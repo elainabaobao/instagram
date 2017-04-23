@@ -1,0 +1,57 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Project</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="styles/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="styles/bootstrap-theme.min.css">
+
+        <link rel='stylesheet' href='styles/main.css'>
+    </head>
+    <body class="container">	
+       <nav class="navbar navbar-default" role="navigation">
+	      <div class="container-fluid">
+
+		    <div class="navbar-header">
+			    <a class="navbar-brand" href="/">Instagram Clone</a>
+		    </div>
+
+		    <ul class="nav navbar-nav pull-right">
+			    <li><a href="/">My Feed</a></li>
+			    <li><a href="/profile">My Profile</a></li>
+          <li><a href="/users">Active Users</a></li>
+          <li><a href="/logout">Logout</a></li>
+		    </ul>
+	  
+	      </div>
+      </nav>
+
+        <main>
+            <div class="jumbotron">
+                <h3>My Feeds</h3>
+            
+            <div class="clearfix"></div>
+            <div class="row">
+                <% dash_photos.forEach(function(photo) { %>
+                    <div class="col-sm-4 tab" >
+                        <img src="http://<%= site_path %>/uploads/<%= photo.image %>" alt="<%= photo.image %>">
+                        <p class="caption"><%= photo.caption %></p>
+                        <p class="uploaded_by">Uploaded  By: <%= photo.name %></p>
+                        <p class="uploaded_on">Uploaded on: <%= photo.uploaded %></p>
+                    </div>
+                <% }); %>
+            </div>
+</div>
+        </main>
+
+         <footer>
+            <!-- Latest compiled and minified JavaScript -->
+            <script   src="javascript/jquery-2.2.4.min.js"></script>
+            <script src='javascript/main.js'></script>
+        </footer>
+    </body>
+</html>

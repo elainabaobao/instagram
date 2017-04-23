@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Project</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="styles/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="styles/bootstrap-theme.min.css">
+
+        <link rel='stylesheet' href='styles/main.css'>
+    </head>
+    <body id="postapp">	
+
+        <!-- BODY -->
+        <div class="container" style="padding-top:20px">
+            <div class="row">
+                <div class="col-md-2 post-col"></div>
+                <div class="col-md-8 post-col">			
+
+                    <div class="input-group login-panel">
+                        <h3>Login</h3>
+                        <form id="loginForm" onsubmit="return submitLogin();">
+                            Email: <input type="email" id="email" name="email" class="form-control1" required/>
+                            Password: <input type="password" id="password" name="password" class="form-control1" required/>
+                            <button type="submit" class="btn btn-success">Login</button>
+                        </form>
+                        <div class="col-md-12"><a href="javascript:void(0)" id="register">New User? Register Here</a>
+                        </div><!-- js-add-post -->                                
+                    </div>
+                    
+                    <div class="input-group register-panel" style="display:none">
+                        <h3>Register</h3>
+                        <form id="registerForm" onsubmit="return submitRegister();">
+                            Name: <input type="text" id="name" name="name" class="form-control1" required/>
+                            Email: <input type="email" id="email" name="email" class="form-control1" required/>
+                            Password: <input type="password" id="password" name="password" class="form-control1" required/>
+                            <button type="submit" class="btn btn-success">Register</button>
+                            
+                        </form>
+                        <div class="col-md-12"><a href="javascript:void(0)" id="login">Already a user? Login Here</a>
+                        </div><!-- js-add-post -->                                
+                    </div>
+                    <div class="error_form" style="display: none"></div>
+                    <!-- content -->
+                    <div class="col-md-2 post-col"></div>
+                </div><!-- row -->
+            </div><!-- container -->
+
+            <footer>
+            <!-- Latest compiled and minified JavaScript -->
+            <script   src="javascript/jquery-2.2.4.min.js"></script>
+            <script src='javascript/main.js'></script>
+        </footer>
+    </body>
+</html>
