@@ -1,7 +1,7 @@
 {
   "name": "instagram",
   "version": "1.0.0",
-  "description": "ling and andrew",
+  "description": "ling, andrew, mario",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,11 +17,14 @@
   },
   "homepage": "https://github.com/elainabaobao/instagram#readme",
   "dependencies": {
-    "body-parser": "^1.17.1",
-    "express": "^4.15.2",
+    "ejs": "^2.5.6",
+    "express": "^4.14.0",
+    "express-myconnection": "^1.0.4",
+    "express-session": "^1.14.1",
+    "fs": "0.0.1-security",
     "passport": "^0.3.2",
-    "serve-static": "^1.12.1",
-    "sqlite": "^2.5.0",
-    "supervisor": "^0.12.0"
+    "passport-local": "^1.0.0",
+    "request": "^2.74.0",
+    "sqlite3": "^3.1.8"
   }
 }
