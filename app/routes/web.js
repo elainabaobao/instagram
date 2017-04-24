@@ -19,6 +19,8 @@ module.exports = function (app, passport) {
         });
     });
 
+
+
     app.get('/profile', checkAuth, function (req, res) {
         var photos_uploaded = [];
         db.each("SELECT image,caption,uploaded FROM users_images WHERE user_id = ? ORDER BY uploaded DESC", req.session.user.id, function (err, row) {
@@ -33,6 +35,7 @@ module.exports = function (app, passport) {
                 photos_uploaded: photos_uploaded
             });
         });
+
     });
 
     app.get('/users', checkAuth, function (req, res) {
