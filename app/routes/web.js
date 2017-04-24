@@ -1,6 +1,6 @@
 module.exports = function (app, passport) {
 
- app.get('/', checkIsLoggedIn, function (req, res) {
+    app.get('/', checkIsLoggedIn, function (req, res) {
         res.render('pages/index');
     });
 
@@ -19,8 +19,6 @@ module.exports = function (app, passport) {
         });
     });
 
-
-
     app.get('/profile', checkAuth, function (req, res) {
         var photos_uploaded = [];
         db.each("SELECT image,caption,uploaded FROM users_images WHERE user_id = ? ORDER BY uploaded DESC", req.session.user.id, function (err, row) {
@@ -35,7 +33,6 @@ module.exports = function (app, passport) {
                 photos_uploaded: photos_uploaded
             });
         });
-
     });
 
     app.get('/users', checkAuth, function (req, res) {
@@ -109,34 +106,19 @@ module.exports = function (app, passport) {
             res.redirect('/dashboard');
         }
     });
-    
- //APIs
+
+    //APIs
     var webUrl = app.get('webUrl');
 
     app.post('/uploadPhoto', function (req, res) {
 //        console.log(req.files);
-        if (!req.files) {
-            res.json({status: 500, 'message': 'Please upload an image file.'});
+        if (!req.body.image_path) {
+            res.json({status: 500, 'message': 'Unable to locate file uploaded.'});
         } else {
-            var imageFile = req.files.userPhoto;
-            var filename = req.files.userPhoto.name;
-            var file_split = filename.split('.');
-            var filename_original = file_split[0];
-            var filename_extension = file_split[1];
-            var new_file_name = filename_original + "_" + Date.now() + '.' + filename_extension;
             var caption = req.body.caption;
-            if (req.files.userPhoto.mimetype == 'image/jpeg' || req.files.userPhoto.mimetype == 'image/gif' || req.files.userPhoto.mimetype == 'image/png') {
-                imageFile.mv(__dirname + '/../../uploads/' + new_file_name, function (err) {
-                    if (err) {
-                        res.json({status: 500, 'message': 'Error while uploading file.'});
-                    }
-                    //saving entry in db
-                    db.run("INSERT into users_images (user_id,image,caption) VALUES ('" + req.session.user.id + "','" + new_file_name + "','" + caption + "')");
-                    res.json({status: 200, 'message': 'Image uploaded successfully'});
-                });
-            } else {
-                res.json({status: 500, 'message': 'Error: Allowed file types are jpg/jpeg/png/gif'});
-            }
+            db.run("INSERT into users_images (user_id,image,caption) VALUES ('" + req.session.user.id + "','" + req.body.image_path + "','" + caption + "')");
+            res.json({status: 200, 'message': 'Image uploaded successfully'});
+                
         }
     });
 
@@ -185,8 +167,7 @@ module.exports = function (app, passport) {
         req.session.destroy();
         res.redirect('/');
     });
-}  
-
+}
 
 function checkAuth(req, res, next) {
     if (req.session.user)
@@ -201,3 +182,5 @@ function checkIsLoggedIn(req, res, next) {
     else
         next();
 }
+
+
