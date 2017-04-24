@@ -17,8 +17,9 @@
   },
   "homepage": "https://github.com/elainabaobao/instagram#readme",
   "dependencies": {
-    "ejs": "^2.5.6",
+   "ejs": "^2.5.6",
     "express": "^4.14.0",
+    "express-fileupload": "0.0.6",
     "express-myconnection": "^1.0.4",
     "express-session": "^1.14.1",
     "fs": "0.0.1-security",
