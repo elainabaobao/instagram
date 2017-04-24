@@ -1,23 +1,9 @@
 {
-  "name": "instagram",
+  "name": "Clone",
   "version": "1.0.0",
-  "description": "ling, andrew, mario",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/elainabaobao/instagram.git"
-  },
-  "author": "ling and andrew",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/elainabaobao/instagram/issues"
-  },
-  "homepage": "https://github.com/elainabaobao/instagram#readme",
   "dependencies": {
-   "ejs": "^2.5.6",
+    "ejs": "^2.5.6",
     "express": "^4.14.0",
     "express-fileupload": "0.0.6",
     "express-myconnection": "^1.0.4",
