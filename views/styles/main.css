@@ -1,0 +1,19 @@
+ 	.error_form{
+    color:red;
+}
+.caption{
+    font-size:13px !important;
+        margin-bottom: 10px !important;
+}
+.uploaded_on{
+    font-size:11px  !important;
+}
+
+.tab img{
+    width:100%;
+    height:190px;
+}
+
+.col-sm-4{
+    height:350px;
+}
