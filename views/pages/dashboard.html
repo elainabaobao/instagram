@@ -11,6 +11,8 @@
         <main>
             <div class="jumbotron">
                 <h3>My Feeds</h3>
+
+                
             
             <div class="clearfix"></div>
             <div class="row">
@@ -20,6 +22,7 @@
                         <p class="caption"><%= photo.caption %></p>
                         <p class="uploaded_by">Uploaded  By: <%= photo.name %></p>
                         <p class="uploaded_on">Uploaded on: <%= photo.uploaded %></p>
+
                     </div>
                 <% }); %>
             </div>
@@ -29,5 +32,6 @@
         <footer>
             <% include ../partials/footer.html %>
         </footer>
+        <script type="text/javascript" src="caman.full.min.js"></script>
     </body>
 </html>

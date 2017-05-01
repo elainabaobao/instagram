@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "ejs": "^2.5.6",
     "express": "^4.14.0",
-    "express-fileupload": "0.0.6",
     "express-myconnection": "^1.0.4",
     "express-session": "^1.14.1",
-    "fs": "0.0.1-security",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "request": "^2.74.0",

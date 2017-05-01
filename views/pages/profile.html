@@ -12,7 +12,7 @@
             <div class="jumbotron">
                 <h3>Hi <%= user_name %></h3>
                 <p>Upload picture</p>
-                <form id = "uploadForm" enctype = "multipart/form-data" action = "uploadPhoto" method = "post">
+                <form id = "uploadForm" action = "uploadPhoto" method = "post">
                     <input type="hidden" name="image_path" id="image_path" />
                     <input type="file" name="userPhoto" id="userPhoto"/>
 Caption : <textarea name= "caption" rows="5" cols="100" class="form-control"></textarea>

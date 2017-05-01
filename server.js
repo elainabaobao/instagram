@@ -6,24 +6,19 @@ var app = express();
 var passport = require('passport');
 var session = require('express-session');
 var http = require('http');
-var fileUpload = require('express-fileupload');
-var fs = require('fs');
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
 
 require('./app/config/config')(app);
 
 http = http.createServer(app);
 
 require('./app/config/connection')(app);
-/**
- Global Variables and Object
- **/
-global.upload_path = __dirname + '/public/uploads/';
-global.image_path = __dirname + '/public/images/';
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-
-//app.set('view engine', 'ejs');
     
 /**
  Setting static paths
@@ -39,7 +34,6 @@ app.use(session({
 })); // session secret
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(fileUpload());
 
 module.exports = function (req, res) {
 
