@@ -53,7 +53,12 @@ $(function () {
                     // Upload completed successfully, now we can get the download URL
                     var downloadURL = uploadTask.snapshot.downloadURL;
                     $('#image_path').val(downloadURL);
-                    form.ajaxSubmit({
+                    
+                    $.ajax(
+                    {
+                        url: 'uploadPhoto',
+                        type: "POST",
+                        data : form.serialize(),
                         error: function (xhr) {
                             $("#status").empty().hide();
                             $(".error_form").empty().text('Error: ' + xhr.status).show();
