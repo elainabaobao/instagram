@@ -4,6 +4,21 @@ module.exports = function (app, passport) {
         res.render('pages/index');
     });
 
+      app.get('/deactivate', checkAuth, function (req, res) {
+        var user_id = req.session.user.id;
+        if (user_id) {
+            db.run("DELETE FROM users WHERE id = ?", user_id, function (err, row) {
+                if (!err) {
+                    res.redirect('/logout');
+                } else {
+                    res.redirect('/dashboard');
+                }
+            });
+        } else {
+            res.redirect('/dashboard');
+        }
+    });
+    
     app.get('/dashboard', checkAuth, function (req, res) {
         var dash_photos = [];
         db.each("SELECT u.name,ui.image,ui.caption,ui.uploaded FROM follows f LEFT JOIN users u ON u.id = f.following_user_id LEFT JOIN users_images ui ON ui.user_id = f.following_user_id WHERE f.user_id = ? ORDER BY ui.uploaded DESC", req.session.user.id, function (err, row) {
